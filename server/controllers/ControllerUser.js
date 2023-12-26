@@ -1,7 +1,17 @@
-class User {
+const { User } = require("../models");
+
+class ControllerUser {
     static async register(req, res, next) {
         try {
-            res.send('Register')
+            const user = await User.create ({
+                ...req.body
+            });
+
+            res.status(201).json({
+                id: user.id,
+                email: user.email,
+                username: user.username
+            });
         } catch (error) {
             next(error);
         }
@@ -16,4 +26,4 @@ class User {
     }
 }
 
-module.exports = User
+module.exports = ControllerUser
