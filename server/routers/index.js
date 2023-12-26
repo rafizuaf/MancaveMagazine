@@ -1,5 +1,6 @@
 const express = require('express');
 const users = require('./users');
+const posts = require('./posts');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
@@ -10,6 +11,7 @@ router.get('/', (req, res, next) => {
     }
 })
 router.use('/users', users)
+router.use('/posts', posts)
 
 
 module.exports = router
