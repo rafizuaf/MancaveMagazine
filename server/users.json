@@ -1,0 +1,14 @@
+[
+    {
+        "username": "Rafi Fauzi",
+        "email": "mukhtar.r.f@gmail.com",
+        "password": "password",
+        "role": "moderator"
+    },
+    {
+        "username": "John Anthony Frusciante",
+        "email": "frusciante@mail.com",
+        "password": "password",
+        "role": "author"
+    }
+]
