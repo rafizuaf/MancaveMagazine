@@ -1,3 +1,5 @@
+const { comparePassword } = require("../helpers/bcrypt");
+const { signToken } = require("../helpers/jwt");
 const { User } = require("../models");
 
 class ControllerUser {
@@ -19,7 +21,24 @@ class ControllerUser {
 
     static async login(req, res, next) {
         try {
-            res.send('Login')
+            const { email, password } = req.body
+            if (!email || !password) {
+                throw { name: "BadRequest" }
+            };
+
+            const user = await User.findOne({ where: { email } });
+            if (!user) {
+                throw { name: "Unauthorized" }
+            };
+
+            const isPasswordValid = comparePassword(password, user.password)
+            if (!isPasswordValid) {
+                throw { name: "Unauthorized" }
+            }
+
+            let access_token = signToken({ id: user.id, role: user.role })
+
+            res.status(200).json({ access_token })
         } catch (error) {
             next(error);
         }
