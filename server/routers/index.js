@@ -1,15 +1,10 @@
 const express = require('express');
 const users = require('./users');
 const posts = require('./posts');
+const ControllerPost = require('../controllers/ControllerPost');
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-    try {
-        res.send('Online')
-    } catch (error) {
-        next(error);
-    }
-})
+router.get('/', ControllerPost.getAllPosts)
 router.use('/users', users)
 router.use('/posts', posts)
 

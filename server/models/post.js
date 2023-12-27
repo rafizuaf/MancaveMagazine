@@ -28,6 +28,19 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'pending',
+      validate: {
+        notNull: {
+          msg: `Status is required`
+        },
+        notEmpty: {
+          msg: `Status is required`
+        }
+      }
+    },
     content: {
       type: DataTypes.TEXT,
       allowNull: false,
